@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
 --	})
 
     use('shaunsingh/nord.nvim')
---    use('folke/tokyonight.nvim')
+    use('folke/tokyonight.nvim')
 
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
@@ -31,8 +31,13 @@ return require('packer').startup(function(use)
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
 
-    use('nvim-tree/nvim-tree.lua')
     use('nvim-tree/nvim-web-devicons')
+    use {
+        'nvim-tree/nvim-tree.lua',
+        after = 'nvim-web-devicons',
+        requires = 'nvim-web-devicons',
+    }
+
     use('nvim-lualine/lualine.nvim')
 
 	use {
