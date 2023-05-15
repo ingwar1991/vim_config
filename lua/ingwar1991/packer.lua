@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
+--  Styles
 --	use({ 
 --		'rose-pine/neovim', 
 --		as = 'rose-pine',
@@ -20,10 +21,10 @@ return require('packer').startup(function(use)
 --			vim.cmd('colorscheme rose-pine')
 --		end
 --	})
-
     use('shaunsingh/nord.nvim')
-    use('folke/tokyonight.nvim')
+--    use('folke/tokyonight.nvim')
 
+--  Parser
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 
@@ -31,6 +32,7 @@ return require('packer').startup(function(use)
 	use('mbbill/undotree')
 	use('tpope/vim-fugitive')
 
+--  File manager
     use('nvim-tree/nvim-web-devicons')
     use {
         'nvim-tree/nvim-tree.lua',
@@ -58,6 +60,10 @@ return require('packer').startup(function(use)
 			{'hrsh7th/nvim-cmp'},     -- Required
 			{'hrsh7th/cmp-nvim-lsp'}, -- Required
 			{'L3MON4D3/LuaSnip'},     -- Required
+
+            -- Snippets
+            {'saadparwaiz1/cmp_luasnip'},
+            {'rafamadriz/friendly-snippets'},
 		}
 	}
 end)
