@@ -8,6 +8,14 @@ end)
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.ensure_installed({
+    'phpactor',
+    'intelephense',
+    'html-lsp',
+    'yaml-language-server',
+    'typescript-language-server',
+    'json-lsp',
+    'sqls',
+    'gopls'
 --	'tsserver',
 --	'rust_analyzer',
 })
