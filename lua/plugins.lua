@@ -1,5 +1,16 @@
-local plugins = {
-	{
+return {
+    --  Styles
+    {
+        'shaunsingh/nord.nvim',
+--        'folke/tokyonight.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd [[colorscheme nord]]
+        end
+    },
+
+    {
 		'nvim-telescope/telescope.nvim',
         version = '0.1.1',
 		dependencies = {
@@ -7,9 +18,6 @@ local plugins = {
         }
 	},
 
---  Styles
-    'shaunsingh/nord.nvim',
---    'folke/tokyonight.nvim',
 
 --  Parser
     {
@@ -18,7 +26,7 @@ local plugins = {
     },
 	'nvim-treesitter/playground',
 
---	'ThePrimeagen/harpoon',
+	'ThePrimeagen/harpoon',
 	'mbbill/undotree',
 	'tpope/vim-fugitive',
 
@@ -54,7 +62,3 @@ local plugins = {
 		}
 	}
 }
-
-local opts = {}
-
-require("lazy").setup(plugins, opts)

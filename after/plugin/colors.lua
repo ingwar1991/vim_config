@@ -7,5 +7,5 @@
 --end
 --ColorMyPencils()
 
-vim.cmd [[colorscheme nord]]
+--vim.cmd [[colorscheme nord]]
 --vim.cmd [[colorscheme tokyonight-storm]]
