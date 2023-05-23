@@ -7,18 +7,21 @@ end)
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-lsp.ensure_installed({
-    'phpactor',
-    'intelephense',
-    'html-lsp',
-    'yaml-language-server',
-    'typescript-language-server',
-    'json-lsp',
-    'sqls',
-    'gopls'
---	'tsserver',
---	'rust_analyzer',
-})
+if (os.getenv('I_AM_IN_DOCKER') == "YES")
+then
+    lsp.ensure_installed({
+        'phpactor',
+        'intelephense',
+        'html-lsp',
+        'yaml-language-server',
+        'typescript-language-server',
+        'json-lsp',
+        'sqls',
+        'gopls'
+--        'tsserver',
+--        'rust_analyzer',
+    })
+end
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
