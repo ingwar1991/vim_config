@@ -39,26 +39,36 @@ return {
 
     'nvim-lualine/lualine.nvim',
 
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
-		dependencies = {
-			-- LSP Support
-			'neovim/nvim-lspconfig',             -- Required
-			{                                      -- Optional
-				'williamboman/mason.nvim',
-				build = ':MasonUpdate'
-			},
-			'williamboman/mason-lspconfig.nvim', -- Optional
-
-			-- Autocompletion
-			'hrsh7th/nvim-cmp',     -- Required
-			'hrsh7th/cmp-nvim-lsp', -- Required
-			'L3MON4D3/LuaSnip',     -- Required
-
-            -- Snippets
-            'saadparwaiz1/cmp_luasnip',
-            'rafamadriz/friendly-snippets',
-		}
-	}
+    'neovim/nvim-lspconfig',             -- Required
+    'lspcontainers/lspcontainers.nvim',
+	
+    'hrsh7th/nvim-cmp',     -- Required
+    'hrsh7th/cmp-nvim-lsp', -- Required
+    'L3MON4D3/LuaSnip',     -- Required
+    'saadparwaiz1/cmp_luasnip',
+    'rafamadriz/friendly-snippets',
+    'github/copilot.vim',
+--    {
+--		'VonHeikemen/lsp-zero.nvim',
+--		branch = 'v2.x',
+--		dependencies = {
+--			-- LSP Support
+--			'neovim/nvim-lspconfig',             -- Required
+--            'lspcontainers/lspcontainers.nvim',
+----			{                                      -- Optional
+----				'williamboman/mason.nvim',
+----				build = ':MasonUpdate'
+----			},
+----			'williamboman/mason-lspconfig.nvim', -- Optional
+--
+--			-- Autocompletion
+--			'hrsh7th/nvim-cmp',     -- Required
+--			'hrsh7th/cmp-nvim-lsp', -- Required
+--			'L3MON4D3/LuaSnip',     -- Required
+--
+--            -- Snippets
+--            'saadparwaiz1/cmp_luasnip',
+--            'rafamadriz/friendly-snippets',
+--		}
+--	}
 }
