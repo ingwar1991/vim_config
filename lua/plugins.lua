@@ -72,4 +72,7 @@ return {
 --            'rafamadriz/friendly-snippets',
 --		}
 --	}
+
+--	Xdebug  
+    'vim-vdebug/vdebug',
 }
