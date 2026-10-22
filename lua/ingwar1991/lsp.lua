@@ -2,6 +2,16 @@ local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
 
+local border = "rounded"  -- <--- define the border style
+
+-- override LSP floating preview to always use a border
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -42,6 +52,10 @@ cmp.setup {
         --{ name = 'vsnip' },
         --{ name = 'buffer' },
         --{ name = 'path' },
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
 }
 
@@ -85,7 +99,13 @@ lspconfig.intelephense.setup {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('intelephense'),
+    -- cmd = require'lspcontainers'.command('intelephense'),
+    cmd = require'lspcontainers'.command('intelephense', {
+        docker_options = {
+            ["--memory"] = "4g",  -- Set memory limit to 2GB
+            ["--memory-swap"] = "4g"  -- Prevent swapping
+        }
+    }),
     root_dir = require'lspconfig/util'.root_pattern("composer.json", ".git", vim.fn.getcwd()),
 	capabilities = capabilities
 }
@@ -108,14 +128,14 @@ lspconfig.pylsp.setup {
 --    cmd = require'lspcontainers'.command('sumneko_lua'),
 --}
 
-lspconfig.tsserver.setup {
-    before_init = function(params)
-        params.processId = vim.NIL
-    end,
-    cmd = require'lspcontainers'.command('tsserver'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+-- lspconfig.tsserver.setup {
+--     before_init = function(params)
+--         params.processId = vim.NIL
+--     end,
+--     cmd = require'lspcontainers'.command('tsserver'),
+--     root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
+-- 	capabilities = capabilities
+-- }
 
 lspconfig.yamlls.setup {
     before_init = function(params)
@@ -126,9 +146,20 @@ lspconfig.yamlls.setup {
 	capabilities = capabilities
 }
 
-lspconfig.astro.setup {
-    cmd = require'lspcontainers'.command('astro', {
-        image = 'astro-lsp'
-    }),
+lspconfig.terraformls.setup {
+    cmd = require'lspcontainers'.command('terraformls'),
+    filetypes = { "hcl", "tf", "terraform", "tfvars" },
 	capabilities = capabilities
 }
+
+-- lspconfig.astro.setup {
+--     cmd = require'lspcontainers'.command('astro', {
+--         image = 'astro-lsp'
+--     }),
+-- 	capabilities = capabilities
+-- }
+--
+-- lspconfig.phpactor.setup {
+--     cmd = require'lspcontainers'.command('phpactor'),
+-- 	capabilities = capabilities
+-- }

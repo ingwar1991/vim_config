@@ -8,6 +8,16 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+-- continue using tabs for .go files (gofmt uses tabs by default)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.expandtab = false -- Use literal tabs for indentation
+    vim.opt_local.tabstop = 8       -- Go community standard display width
+    vim.opt_local.shiftwidth = 8    -- Auto-indent with 8 spaces equivalent (though literal tabs are used)
+  end
+})
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false

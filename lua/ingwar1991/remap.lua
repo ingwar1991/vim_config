@@ -15,7 +15,8 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>Y", ':let @+ = expand("%:p")<CR>')
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
@@ -34,8 +35,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>p", ':let @+ = expand("%:p")<CR>')
-
 -- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 
 -- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
@@ -43,6 +42,10 @@ vim.keymap.set("n", "<leader>p", ':let @+ = expand("%:p")<CR>')
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
+
+-- comment code
+vim.keymap.set("n", "<C-_>", "gcc", { remap = true })
+vim.keymap.set("v", "<C-_>", "gc", { remap = true })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -73,5 +76,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.lsp.buf.format { async = true }
         end, opts)
         vim.keymap.set('i', '<C-a>', vim.lsp.buf.completion, opts)
+        vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap=true, silent=true })
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to prev diagnostic" })
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
     end,
 })
