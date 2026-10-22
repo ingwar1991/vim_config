@@ -2,7 +2,7 @@ local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
 
-local border = "rounded"  -- <--- define the border style
+local border = "rounded"
 
 -- override LSP floating preview to always use a border
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -17,7 +17,7 @@ cmp.setup {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
-    }, 
+    },
     mapping = {
         ['<C-k>'] =  cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -41,9 +41,9 @@ cmp.setup {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-c>'] = cmp.mapping.close(),
-        ['<C-y>'] = cmp.mapping.confirm({ 
+        ['<C-y>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
-            select = false 
+            select = false
         }),
     },
     sources = {
@@ -59,107 +59,104 @@ cmp.setup {
     },
 }
 
-local lspconfig = require('lspconfig')
 local lspcontainers = require('lspcontainers')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.bashls.setup {
+vim.lsp.config('bashls', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('bashls'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    cmd = lspcontainers.command('bashls'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('bashls')
 
-lspconfig.dockerls.setup {
+vim.lsp.config('dockerls', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('dockerls'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    cmd = lspcontainers.command('dockerls'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('dockerls')
 
-lspconfig.gopls.setup {
-    cmd = require'lspcontainers'.command('gopls'),
-	capabilities = capabilities
-}
+vim.lsp.config('gopls', {
+    cmd = lspcontainers.command('gopls'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('gopls')
 
-lspconfig.html.setup {
+vim.lsp.config('html', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('html'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    cmd = lspcontainers.command('html'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('html')
 
-lspconfig.intelephense.setup {
+vim.lsp.config('intelephense', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    -- cmd = require'lspcontainers'.command('intelephense'),
-    cmd = require'lspcontainers'.command('intelephense', {
+    cmd = lspcontainers.command('intelephense', {
         docker_options = {
-            ["--memory"] = "4g",  -- Set memory limit to 2GB
-            ["--memory-swap"] = "4g"  -- Prevent swapping
-        }
+            ["--memory"] = "4g",
+            ["--memory-swap"] = "4g",
+        },
     }),
-    root_dir = require'lspconfig/util'.root_pattern("composer.json", ".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    capabilities = capabilities,
+})
+vim.lsp.enable('intelephense')
 
-lspconfig.jsonls.setup {
+vim.lsp.config('jsonls', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('jsonls'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    cmd = lspcontainers.command('jsonls'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('jsonls')
 
-lspconfig.pylsp.setup {
-    cmd = require'lspcontainers'.command('pylsp'),
-	capabilities = capabilities
-}
+vim.lsp.config('pylsp', {
+    cmd = lspcontainers.command('pylsp'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('pylsp')
 
---lspconfig.sumneko_lua.setup {
---    cmd = require'lspcontainers'.command('sumneko_lua'),
---}
-
--- lspconfig.tsserver.setup {
+-- vim.lsp.config('ts_ls', {
 --     before_init = function(params)
 --         params.processId = vim.NIL
 --     end,
---     cmd = require'lspcontainers'.command('tsserver'),
---     root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
--- 	capabilities = capabilities
--- }
+--     cmd = lspcontainers.command('tsserver'),
+--     capabilities = capabilities,
+-- })
+-- vim.lsp.enable('ts_ls')
 
-lspconfig.yamlls.setup {
+vim.lsp.config('yamlls', {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = require'lspcontainers'.command('yamlls'),
-    root_dir = require'lspconfig/util'.root_pattern(".git", vim.fn.getcwd()),
-	capabilities = capabilities
-}
+    cmd = lspcontainers.command('yamlls'),
+    capabilities = capabilities,
+})
+vim.lsp.enable('yamlls')
 
-lspconfig.terraformls.setup {
-    cmd = require'lspcontainers'.command('terraformls'),
+vim.lsp.config('terraformls', {
+    cmd = lspcontainers.command('terraformls'),
     filetypes = { "hcl", "tf", "terraform", "tfvars" },
-	capabilities = capabilities
-}
+    capabilities = capabilities,
+})
+vim.lsp.enable('terraformls')
 
--- lspconfig.astro.setup {
---     cmd = require'lspcontainers'.command('astro', {
---         image = 'astro-lsp'
---     }),
--- 	capabilities = capabilities
--- }
+-- vim.lsp.config('astro', {
+--     cmd = lspcontainers.command('astro', { image = 'astro-lsp' }),
+--     capabilities = capabilities,
+-- })
+-- vim.lsp.enable('astro')
 --
--- lspconfig.phpactor.setup {
---     cmd = require'lspcontainers'.command('phpactor'),
--- 	capabilities = capabilities
--- }
+-- vim.lsp.config('phpactor', {
+--     cmd = lspcontainers.command('phpactor'),
+--     capabilities = capabilities,
+-- })
+-- vim.lsp.enable('phpactor')
